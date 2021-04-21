@@ -1,6 +1,7 @@
 const movieApiKey = "f59588f382c7895cd8d35268297e4979";
 
-//for search function - amalec
+//for search function - amalec 
+
 
 
 

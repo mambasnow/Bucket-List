@@ -50,3 +50,5 @@ fetch(movieSearchUrl)
   );
 //this is the initial link to add the and image
 //  http://image.tmdb.org/t/p/w500/
+
+

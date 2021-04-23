@@ -3,11 +3,11 @@ const movieApiKey = "f59588f382c7895cd8d35268297e4979";
 //for search function - amalec 
 //this is for the card with the movie information
 var resultArea = document.querySelector("#results");
-var searchedMovie = $("#movieSearch").val();
+var searchTerm = $("#movieSearch").val();
 
 //
 // const movieSearchUrl = "https://api.themoviedb.org/3/search" + movieApiKey + "&page=1";
-var movieSearchUrl=`https://api.themoviedb.org/3/movie/76341?api_key=${movieApiKey}`;
+var movieSearchUrl=`https://api.themoviedb.org/3/search/movie?api_key=${movieApiKey}&query=${searchTerm}`;
 //var movieSearchUrl=`https://api.themoviedb.org/3/movie/${searchedMovie}?api_key=${movieApiKey}&language=en-US`;
 fetch(movieSearchUrl)
   .then(function (response) {

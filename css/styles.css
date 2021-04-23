@@ -1,13 +1,12 @@
 /*Added some styling for Tittle */
-/* h1{
+h1{
   font-size: 300%;
   font-style: bold;
-} */
+}
 /*Added some styling for the results */
 .result-cards{
   height: 300px;
   width: 300px;
-  border: black solid 2px;
 }
 
 .content{
@@ -15,20 +14,3 @@
   height: 110px;
   overflow: auto;
 }
-
-.genre-selection{
-  border: solid black 5px;
-  max-width: 300px;
-}
-
-.is-dark{
-  width: 130px;
-}
-
-.suggestion-box{
-  height: 500px;
-  width: 600px;
-  border: black solid 3px;
-  background-color: white;
-}
-

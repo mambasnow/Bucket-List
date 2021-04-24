@@ -3,11 +3,10 @@ h1{
   font-size: 300%;
   font-style: bold;
 }
-/*Added some styling for the results */
-/* .result-cards{
-  height: 300px;
-  width: 300px;
-} */
+h2{
+  font-size: 280%;
+  font-style: bold;
+}
 
 .content{
   width: 280px;
@@ -17,6 +16,10 @@ h1{
 
 .movie-section-box{
   overflow-x:auto;
+  border: black solid  2px; 
+  margin: 5px; 
+  border-radius: 30px; 
+  background-color: lightslategray;
 }
 
 .is-dark{
@@ -25,9 +28,26 @@ h1{
 
 .myList{
   align-items: right;
+  border: black solid 2px; 
+  border-radius: 30px; 
+  background-color: lightslategray;
+  margin-right: 15px;
 }
 
 .card{ 
   border: black 2px solid;
   border-radius: 10px;
 }
+
+.search-section{
+  margin-bottom:2%;
+}
+
+.genre-selection{
+  border: black solid 2px;
+  margin-right: 5px; 
+  border-radius: 30px; 
+  background-color: lightslategray;
+  margin-left: 15px;
+}
+

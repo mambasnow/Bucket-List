@@ -1,119 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>The Bucket List</title>
-        
-        <!-- Bulma Version 0.9.0-->
-        <link rel='stylesheet' href='css/reset.css'>
-        <link rel='stylesheet' href='https://unpkg.com/bulma@0.9.0/css/bulma.min.css'>
-        <link rel="stylesheet" href="../Bucket-List/css/styles.css">
-        <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-    <body>
-        <!-- this is the tittle with the hamburger menu-->
-        <nav class="navbar has-shadow">
-            <div class="container">
-                <h1 class="is-title">The Bucket List</h1>
-                <div class="navbar-burger burger" data-target="navMenu"><span></span><span></span><span></span></div>
-            </div>
-            <div class="navbar-menu" id="navMenu">
-                <div class="navbar-end">
-                    <div class="navbar-item has-dropdown is-hoverable"><a class="navbar-link">Account</a>
-                    <div class="navbar-dropdown"><a class="navbar-item">Dashboard</a><a class="navbar-item">Profile</a><a class="navbar-item">Settings</a>
-                    <hr class="navbar-divider" />
-                    <div class="navbar-item">Logout</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</nav>
-<!-- This is the search bar -->
-<section class="hero is-info " style="margin-bottom:2%;">
-<div class="hero-body ">
-    <div class="container ">
-        <div class="card ">
-            <h2 style="text-align: center; size: 30px;" >SEARCH FOR A MOVIE</h2>
-            <div class="card-content" style="display: inline-flex;width: 100%;" >
-                <div class="content" style="width: 100%">
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input  is-large" type="text" id="movieSearch" />
-                        <span class="icon is-medium is-left">
+
+<head>
+	<meta charset="UTF-8">
+	<title>THE BUCKET LIST</title>
+	<!-- Bulma Version 0.9.0-->
+	<link rel='stylesheet' href='css/reset.css'>
+	<link rel='stylesheet' href='https://unpkg.com/bulma@0.9.0/css/bulma.min.css'>
+	<link rel="stylesheet" href="../Bucket-List/css/styles.css">
+	<script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+	<!-- this is the tittle with the hamburger menu-->
+	<nav class="navbar has-shadow">
+		<div class="container">
+			<h1 class="is-title">The Bucket List</h1>
+			<div class="navbar-burger burger" data-target="navMenu"><span></span><span></span><span></span></div>
+		</div>
+		<div class="navbar-menu" id="navMenu">
+			<div class="navbar-end">
+				<div class="navbar-item has-dropdown is-hoverable"><a class="navbar-link">Account</a>
+					<div class="navbar-dropdown"><a class="navbar-item">Dashboard</a><a class="navbar-item">Profile</a><a class="navbar-item">Settings</a>
+						<hr class="navbar-divider" />
+						<div class="navbar-item">Logout</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</nav>
+	<!-- This is the search bar -->
+	<section class="hero is-info search-section">
+		<div class="hero-body ">
+			<div class="container ">
+				<div class="card ">
+					<h2 style="text-align: center; font-size: 30px;">SEARCH FOR A MOVIE</h2>
+					<div class="card-content" style="display: inline-flex; width: 100%;">
+						<div class="content" style="width: 100%">
+							<div class="control has-icons-left has-icons-right">
+								<input class="input  is-large" type="text" id="movieSearch" /> <span class="icon is-medium is-left">
                             <i class="fa fa-search"></i>
-                        </span>
-                        <span class="icon is-medium is-right">
+                        </span> <span class="icon is-medium is-right">
                             <i class="fa fa-empire"></i>
-                        </span>
-                    </div>
-                    
-                </div>
-                <button class="button is-warning is-large" id="searchBtn">Search!</button>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
-<div class="columns">
-    <!--this is the buttons for the genres-->
-    <div class="field box genre-selection is-one-fifth" style="border: black solid 2px; margin: right 5px; border-radius: 30px; background-color: lightslategray;">
-    <label class="label">Genre movie selector</label>
-    <div>
-      <button class="button is-dark" id="Thriller">Thriller</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Horror">Horror</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Comedy">Comedy</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Action">Action</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Drama">Drama</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Science Fiction">Science Fiction</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Musical">Musical</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Romance">Romance</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Adventure">Adventure</button>
-    </div>
-    <br>
-    <div>
-      <button class="button is-dark" id="Sport">Sport</button>
-    </div>
-    <br>
-    <label class="label">Click button for movie suggestions</label>
-    <button class="button is-primary">Find Movies</button>
-  </div>
-
-    <!--will display in a card format with and image and some info about the movie-->
-    <div style="border: black solid  2px; margin: 5px; border-radius: 30px; background-color: lightslategray;" class="movie-section-box is-half">
-        <section id="results" class="columns" style="margin: 2%;">
-        </section>
-    </div>
-    <!--this is where the saved movies will go-->
-    <div class="column  is-one-fifth myList" style="border: black solid 2px; border-radius: 30px; background-color: lightslategray;">
-        <h1>Lists</h1>
-    </div>
-
-</div>
+                        </span> </div>
+						</div>
+						<button class="button is-warning is-large" id="searchBtn">Search!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="columns is">
+		<!--this is the buttons for the genres-->
+		<div class="field box genre-selection is-3">
+			<label class="label">Genre movie selector</label>
+			<div>
+				<button class="button is-dark" id="Thriller">Thriller</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Horror">Horror</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Comedy">Comedy</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Action">Action</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Drama">Drama</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Science Fiction">Science Fiction</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Musical">Musical</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Romance">Romance</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Adventure">Adventure</button>
+			</div>
+			<br>
+			<div>
+				<button class="button is-dark" id="Sport">Sport</button>
+			</div>
+			<br>
+			<label class="label">Click button for movie suggestions</label>
+			<button class="button is-primary">Find Movies</button>
+		</div>
+		<!--will display in a card format with and image and some info about the movie-->
+		<div class="movie-section-box is-6" style="width: 60%; margin: 2%;">
+			<section id="results" class="columns" style="margin: 1%;"> </section>
+		</div>
+		<!--this is where the saved movies will go-->
+		<div class="column  is-3 is-right myList">
+			<h1>Lists</h1> </div>
+	</div>
+	<!--this it the footer, has a link to online repo-->
+	<footer style="background-color: hsl(204, 86%, 53%);">
+		<!--This is a link to the main online repo-->
+		<div style="text-align: center;">
+			<h2>See our code at:</h2>
+			<h2 style="font-size: 300%;">
+                <a href="https://github.com/J-Diaz103/Bucket-List" target="_blank">
+                  <i class="fab fa-github" style="height: 30px;"></i>
+                </a>
+              </h2>
+			<div>
+				<h4 style="font-size: 150%;">Made by: Minh Nguyen, Amalec Guzman, and Jesus Diaz</h2>
+                      <p style="font-size: 150%;">
+                          &copy; 2021 Bucket List , Inc.
+                      </p>
+              </div>
+          </div>
+</footer>
 
 <script src="../Bucket-List/js/script.js"></script>
 </body>

@@ -25,7 +25,7 @@ fetch(movieSearchUrl)
     //console.log(data.results[i].title); 
     
     for(i=0; i<10; i++){ $("#results").append(`    
-    <div class="card column ">
+    <div class="card column" style="margin: 5px;">
       <div class="card-image ">
         <figure class="image is-4by3">
           <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">

@@ -4,13 +4,30 @@ h1{
   font-style: bold;
 }
 /*Added some styling for the results */
-.result-cards{
+/* .result-cards{
   height: 300px;
   width: 300px;
-}
+} */
 
 .content{
   width: 280px;
   height: 110px;
   overflow: auto;
+}
+
+.movie-section-box{
+  overflow-x:auto;
+}
+
+.is-dark{
+  width: 130px;
+}
+
+.myList{
+  align-items: right;
+}
+
+.card{ 
+  border: black 2px solid;
+  border-radius: 10px;
 }

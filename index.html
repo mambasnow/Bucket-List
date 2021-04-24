@@ -12,9 +12,10 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
+        <!-- this is the tittle with the hamburger menu-->
         <nav class="navbar has-shadow">
             <div class="container">
-                <h1>The Bucket List</h1>
+                <h1 class="is-title">The Bucket List</h1>
                 <div class="navbar-burger burger" data-target="navMenu"><span></span><span></span><span></span></div>
             </div>
             <div class="navbar-menu" id="navMenu">
@@ -29,10 +30,12 @@
     </div>
 </div>
 </nav>
-<section class="hero is-info">
-<div class="hero-body">
-    <div class="container">
-        <div class="card">
+<!-- This is the search bar -->
+<section class="hero is-info " style="margin-bottom:2%;">
+<div class="hero-body ">
+    <div class="container ">
+        <div class="card ">
+            <h2 style="text-align: center; size: 30px;" >SEARCH FOR A MOVIE</h2>
             <div class="card-content" style="display: inline-flex;width: 100%;" >
                 <div class="content" style="width: 100%">
                     <div class="control has-icons-left has-icons-right">
@@ -52,33 +55,66 @@
     </div>
 </div>
 </section>
-<div class="box cta">
-<div class="columns is-mobile is-centered">
-    <div class="field is-grouped is-grouped-multiline">
-        <div class="control"><span class="tag is-link is-large">Link</span></div>
-        <div class="control"><span class="tag is-success is-large">Success</span></div>
-        <div class="control"><span class="tag is-black is-large">Black</span></div>
-        <div class="control"><span class="tag is-warning is-large">Warning</span></div>
-        <div class="control"><span class="tag is-danger is-large">Danger</span></div>
-        <div class="control"><span class="tag is-info is-large">Info</span></div>
+<div class="columns">
+    <!--this is the buttons for the genres-->
+    <div class="field box genre-selection is-one-fifth" style="border: black solid 2px; margin: right 5px; border-radius: 30px; background-color: lightslategray;">
+    <label class="label">Genre movie selector</label>
+    <div>
+      <button class="button is-dark" id="Thriller">Thriller</button>
     </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Horror">Horror</button>
+    </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Comedy">Comedy</button>
+    </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Action">Action</button>
+    </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Drama">Drama</button>
+    </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Science Fiction">Science Fiction</button>
+    </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Musical">Musical</button>
+    </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Romance">Romance</button>
+    </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Adventure">Adventure</button>
+    </div>
+    <br>
+    <div>
+      <button class="button is-dark" id="Sport">Sport</button>
+    </div>
+    <br>
+    <label class="label">Click button for movie suggestions</label>
+    <button class="button is-primary">Find Movies</button>
+  </div>
+
+    <!--will display in a card format with and image and some info about the movie-->
+    <div style="border: black solid  2px; margin: 5px; border-radius: 30px; background-color: lightslategray;" class="movie-section-box is-half">
+        <section id="results" class="columns" style="margin: 2%;">
+        </section>
+    </div>
+    <!--this is where the saved movies will go-->
+    <div class="column  is-one-fifth myList" style="border: black solid 2px; border-radius: 30px; background-color: lightslategray;">
+        <h1>Lists</h1>
+    </div>
+
 </div>
-</div>
-<section class="container">
 
-
-</section>
-<div class="columns is-mobile is-centered">
-<div class="column is-half is-narrow"></div>
-</div>
-<!--Practice the suggestiond display-->
-<!--will display in a card format with and image and some info about the movie-->
-<section id="results">
-
-</section>
-<footer>
-
-</footer>
 <script src="../Bucket-List/js/script.js"></script>
 </body>
 </html>

@@ -16,25 +16,13 @@
 <body>
   <!-- this is the tittle with the hamburger menu-->
   <nav class="navbar has-shadow">
-    <div class="container">
-      <h1 class="is-title">The Bucket List</h1>
-      <div class="navbar-burger burger" data-target="navMenu"><span></span><span></span><span></span></div>
-    </div>
-    <div class="navbar-menu" id="navMenu">
-      <div class="navbar-end">
-        <div class="navbar-item has-dropdown is-hoverable"><a class="navbar-link">Account</a>
-          <div class="navbar-dropdown"><a class="navbar-item">Dashboard</a><a class="navbar-item">Profile</a><a
-              class="navbar-item">Settings</a>
-            <hr class="navbar-divider" />
-            <div class="navbar-item">Logout</div>
-          </div>
-        </div>
-      </div>
+    <div class="container is-fullhd">
+      <h1 class="is-title is-left" id="headerName">The Bucket List</h1>
     </div>
   </nav>
 
   <!-- This is the search bar -->
-  <section class="hero is-info " style="margin-bottom:2%;">
+  <section class="hero is-info" style="width: 100%;">
     <div class="hero-body ">
       <div class="container ">
         <div class="card ">
@@ -64,84 +52,50 @@
    <label class="label 2"  style="font-size:40px; font-weight: 400; width:100%; text-align: center;">Critics top picks!</label>
    <div id="reviews"></div>
  </div>
-</section> 
-  <div class="columns">
-    <!--this is the buttons for the genres-->
-    <div class="field box genre-selection is-one-fifth"
-      style="border: black solid 2px; margin: right 5px; border-radius: 30px; background-color: lightslategray;">
-      <label class="label">Genre movie selector</label>
-      <div>
-        <button class="button genreButton is-dark" id="53">Thriller</button>
+</section>
+<div class="box cta">
+  <div class="columns is-mobile is-centered">
+      <div class="field is-grouped is-grouped-multiline">
+         <!--this is the buttons for the genres-->
+          <div class="control"><button id="53" class="tag  is-large genreButton">Thriller</button></div>
+          <div class="control"><button id="27" class="tag  is-large genreButton">Horror</button ></div>
+          <div class="control"><button id="35" class="tag  is-large genreButton">Comedy</button ></div>
+          <div class="control"><button id="28" class="tag  is-large genreButton">Action</button ></div>
+          <div class="control"><button id="18" class="tag  is-large genreButton">Drama</button ></div>
+          <div class="control"><button id="878" class="tag  is-large genreButton">Science Fiction</button ></div>
+          <div class="control"><button id="10402" class="tag  is-large genreButton">Musical</button ></div>
+          <div class="control"><button id="10749"  class="tag  is-large genreButton">Romance</button ></div>
+          <div class="control"><button id="12"  class="tag  is-large genreButton">Adventure</button ></div>
+          <div class="control"><button id="16"  class="tag  is-large genreButton">Romance</button ></div>
       </div>
-      <br>
-      <div>
-        <button class="button genreButton  is-dark" id="27">Horror</button>
-      </div>
-      <br>
-      <div>
-        <button class="button genreButton is-dark" id="35">Comedy</button>
-      </div>
-      <br>
-      <div>
-        <button class="button genreButton  is-dark" id="28">Action</button>
-      </div>
-      <br>
-      <div>
-        <button class="button genreButton  is-dark" id="18">Drama</button>
-      </div>
-      <br>
-      <div>
-        <button class="button genreButton  is-dark" id="878">Science Fiction</button>
-      </div>
-      <br>
-      <div>
-        <button class="button genreButton  is-dark" id="10402">Musical</button>
-      </div>
-      <br>
-      <div>
-        <button class="button genreButton  is-dark" id="10749">Romance</button>
-      </div>
-      <br>
-      <div>
-        <button class="button genreButton  is-dark" id="12">Adventure</button>
-      </div>
-      <br>
-      <div>
-        <button class="button genreButton  is-dark" id="16">Animation</button>
-      </div>
-      <br>
-      <label class="label">Click button for movie suggestions</label>
-      <button class="button is-primary">Find Movies</button>
-    </div>
+  </div>
 
-    <!--will display in a card format with and image and some info about the movie-->
-    <div class="movie-section-box is-6" style="width: 60%; margin: 2%;">
-      <section id="results" class="columns" style="margin: 1%;"> </section>
     </div>
-    <!--this is where the saved movies will go-->
-    <div class="column  is-3 is-right myList">
-      <h1>Lists</h1>
+  <section class="container">
+  <div class="columns">
+    <!--will display in a card format with and image and some info about the movie-->
+    <div class="movie-section-box column ">
+      <section id="results" class="columns" style="margin: 1%;">
+       </section>
     </div>
   </div>
-  <!--this it the footer, has a link to online repo-->
-  <footer style="background-color: hsl(204, 86%, 53%);">
-    <!--This is a link to the main online repo-->
-    <div style="text-align: center;">
-      <h2>See our code at:</h2>
-      <h2 style="font-size: 300%;">
-        <a href="https://github.com/J-Diaz103/Bucket-List" target="_blank">
-          <i class="fab fa-github" style="height: 30px;"></i>
-        </a>
-      </h2>
-      <div>
-        <h4 style="font-size: 150%;">Made by: Minh Nguyen, Amalec Guzman, and Jesus Diaz</h2>
-          <p style="font-size: 150%;">
-            &copy; 2021 Bucket List , Inc.
-          </p>
-      </div>
-    </div>
-  </footer>
-
+</section>
+<div id="watchList" class="myList">
+  <!--this is where the saved movies will go-->
+    <h1>Watch List</h1>
+</div>
+ <!--this it the footer, has a link to online repo-->
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <a href="https://github.com/J-Diaz103/Bucket-List" target="_blank">
+        <i class="fab fa-github" style="height: 15px;"></i>
+      </a>
+      Made by: Minh Nguyen, Amalec Guzman, and Jesus Diaz
+      &copy; 2021 Bucket List , Inc.
+      </p>
+  </div>
+</footer>
   <script src="../Bucket-List/js/script.js"></script>
 </body>
 

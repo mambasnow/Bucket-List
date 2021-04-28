@@ -40,7 +40,7 @@ fetch(movieSearchUrl)
       <div class="card-content">
         <div class="media">
           <div class="media-content">
-            <p class="title is-4">${data.results[i].title}</p>
+            <p class="title is-4 movie-tittle">${data.results[i].title}</p>
           </div>
         </div>
 
@@ -49,6 +49,7 @@ fetch(movieSearchUrl)
       <p>${data.results[i].overview}</p>
        
         </div>
+        <button  class="button addMovie"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>`);
     }
@@ -90,7 +91,7 @@ function getRandomInt(max) {
       <div class="card-content">
         <div class="media">
           <div class="media-content">
-            <p class="title is-4">${data.results[i].title}</p>
+            <p class="title is-4 movie-tittle">${data.results[i].title}</p>
           </div>
         </div>
 
@@ -99,12 +100,19 @@ function getRandomInt(max) {
       <p>${data.results[i].overview}</p>
        
         </div>
+        <button  class="button addMovie"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>`);
     }
   });
 
+
  }   
   
 /// populates movies accordingly to selected genre
 $('.genreButton').click(genreButtonEvent);
+
+
+$("body").on("click", ".addMovie", function(){
+  console.log($(".movie-tittle").text());
+})

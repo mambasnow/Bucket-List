@@ -81,26 +81,32 @@ function getRandomInt(max) {
     $('#results').empty();
 
     for(i=0; i<10; i++){ $("#results").append(`    
-    <div id="movieSearches" class="card column ">
-      <div class="card-image ">
-        <figure class="image is-4by3">
-          <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="media">
-          <div class="media-content">
-            <p class="title is-4">${data.results[i].title}</p>
-          </div>
+    <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
         </div>
-
+        <div class="media-content">
+          <p class="title is-4">${data.results[i].title}</p>
+        </div>
+      </div>
+  
       <div class="content">
-      <p class="movie-overview"> movie summary</p>
       <p>${data.results[i].overview}</p>
-       
-        </div>
       </div>
-    </div>`);
+    </div>
+  </div>`
+    
+    //// new card
+   
+    
+    
+    );
     }
   });
 

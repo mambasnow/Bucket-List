@@ -30,4 +30,8 @@ h1{
 .card{ 
   border: black 2px solid;
   border-radius: 10px;
+} 
+
+.card header{ 
+        width:50%;
 }

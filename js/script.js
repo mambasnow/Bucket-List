@@ -1,16 +1,21 @@
 const movieApiKey = "f59588f382c7895cd8d35268297e4979";
 
 //for search function - amalec 
-//this is for the card with the movie information
-var resultArea = document.querySelector("#results");
+//this is for the card with the movie information 
+//Also for reviews of the movies as well . 
+var resultArea = document.querySelector("#results"); 
+
 
 
 $("#searchBtn").click(function(){ 
  
-  var movieSearchUrl=`https://api.themoviedb.org/3/search/movie?api_key=${movieApiKey}&query=${$("#movieSearch").val() }`;
-  
+  var movieSearchUrl=`https://api.themoviedb.org/3/search/movie?api_key=${movieApiKey}&query=${$("#movieSearch").val() }`; 
+
  
-fetch(movieSearchUrl)
+  
+
+
+  fetch(movieSearchUrl)
   .then(function (response) {
     return response.json();
   })
@@ -49,9 +54,40 @@ fetch(movieSearchUrl)
   });
 });
 
-   
-    
+  //Movie Review Api function . 
+  //var reviewsArea = document.querySelector("#reviews"); 
   
+    
+  //var movieReviewUrl=`https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP`
+    
+    fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("NETWORK RESPONSE ERROR");
+      }
+    })
+    .then(data => {
+      console.log(data);
+      const reviewElement = $("#reviews")
+      reviewElement.innerText = data.results[0].display_title
+       
+        
+      var titles =''  
+      for (let i=0; i<10; i++){ 
+        console.log(i, data.results[i])
+        console.log(i, data.results[i].display_title)
+        // titles = titles + data.results[i].display_title  
+
+        // $("#findPicks").("reviews");
+        reviewElement.append(`<a href="${data.results[i].link.url}" target="_blank"><button class="button is-info">${data.results[i].display_title }</button></a>`)
+      }
+    
+    })
+    .catch((error) => console.error("FETCH ERROR:", error)); 
+
+     
 
 
 // no longer need this correct code is in line 1-49

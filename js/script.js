@@ -112,7 +112,34 @@ function getRandomInt(max) {
 /// populates movies accordingly to selected genre
 $('.genreButton').click(genreButtonEvent);
 
-
+// this will be a function to add the movies to the list
 $("body").on("click", ".addMovie", function(){
   console.log($(".movie-tittle").text());
 })
+//Critics Review pull and links 
+fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("NETWORK RESPONSE ERROR");
+      }
+    })
+    .then(data => {
+      console.log(data);
+      const reviewElement = $("#reviews")
+      reviewElement.innerText = data.results[0].display_title
+       
+        
+      var titles =''  
+      for (let i=0; i<10; i++){ 
+        console.log(i, data.results[i])
+        console.log(i, data.results[i].display_title)
+        // titles = titles + data.results[i].display_title  
+
+        // $("#findPicks").("reviews");
+        reviewElement.append(`<a href="${data.results[i].link.url}" target="_blank"><button class="button is-info">${data.results[i].display_title }</button></a>`)
+      }
+    
+    })
+    .catch((error) => console.error("FETCH ERROR:", error)); 

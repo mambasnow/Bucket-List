@@ -1,4 +1,5 @@
 const movieApiKey = "f59588f382c7895cd8d35268297e4979";
+let resultsText = $("#resultsText");
 
 //for search function - amalec 
 //this is for the card with the movie information
@@ -8,7 +9,7 @@ var resultArea = document.querySelector("#results");
 
 
 $("#searchBtn").click(function(){ 
- 
+  resultsText.text("Search Results:");
   var movieSearchUrl=`https://api.themoviedb.org/3/search/movie?api_key=${movieApiKey}&query=${$("#movieSearch").val() }`;
   
  
@@ -57,6 +58,54 @@ fetch(movieSearchUrl)
 });
 
 
+
+
+function popularMovies(){
+
+ let popularMovieLink =  `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`;
+
+ fetch(popularMovieLink)
+ .then(function (response) {
+   return response.json();
+ })
+ .then(function (data){
+   console.log(data);
+
+   // need to grab 10 random movies from random pages
+   $('#results').empty();
+
+   for(i=0; i<10; i++){ $("#results").append(`    
+   <div class="card">
+   <div class="card-image">
+     <figure class="image is-4by3">
+       <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
+     </figure>
+   </div>
+   <div class="card-content">
+     <div class="media">
+       <div class="media-left">
+       </div>
+       <div class="media-content">
+         <p class="title is-4">${data.results[i].title}</p>
+       </div>
+     </div>
+ 
+     <div class="content">
+     <p>${data.results[i].overview}</p>
+      
+       </div>
+       <button  class="button addMovie" value="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+     </div>
+   </div>
+ </div>`  
+   );
+   }
+ });
+
+
+
+}
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -65,7 +114,7 @@ function getRandomInt(max) {
 
 // function that will run inside click for genres   
  function genreButtonEvent(event){
-
+  resultsText.text("Random " +$(this).text() + " " + "Results");  
   let randomPage = getRandomInt(500);
   let selectedMovieId = $(this).attr("id");
   let genreSearchURL = `https://api.themoviedb.org/3/genre/${selectedMovieId}/movies?api_key=${movieApiKey}&language=en-US&page=${randomPage}`;
@@ -105,10 +154,6 @@ function getRandomInt(max) {
       </div>
     </div>
   </div>`
-    
-    //// new card
-   
-    
     
     );
     }
@@ -154,3 +199,10 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
     
     })
     .catch((error) => console.error("FETCH ERROR:", error)); 
+
+
+//// function execute when document is fully loaded
+    $(document).ready(function(){
+      popularMovies();
+
+    })

@@ -4,6 +4,8 @@
   float: left;
 }
 
+
+
 .message-header{
   border-radius: 0px;
   background-color: darkblue;
@@ -49,7 +51,10 @@ display: inline;
 
 .card{ 
   margin:2px;
+  transition: all .2s ease-in-out;
 }
+
+.card:hover { transform: scale(1.02)}
 
 .search-section{
   margin-bottom:2%;
@@ -63,6 +68,13 @@ display: inline;
 
 .hero{
   margin-bottom: 0;
+}
+
+
+#reviews{
+  margin-top: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 #watchList{

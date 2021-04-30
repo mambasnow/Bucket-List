@@ -105,9 +105,6 @@ function getRandomInt(max) {
       </div>
     </div>
   </div>`
-    
-    //// new card
-
     );
     }
   });
@@ -222,10 +219,9 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
        
         
       var titles =''  
-      for (let i=0; i<10; i++){ 
-        // console.log(i, data.results[i])
-        // console.log(i, data.results[i].display_title)
-        // titles = titles + data.results[i].display_title  
+      for (let i=0; i<5; i++){ 
+        console.log(i, data.results[i])
+        console.log(i, data.results[i].display_title);  
 
         // $("#findPicks").("reviews");
         reviewElement.append(`<a href="${data.results[i].link.url}" target="_blank"><button class="button is-info">${data.results[i].display_title }</button></a>`)
@@ -234,8 +230,8 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
     })
     .catch((error) => console.error("FETCH ERROR:", error)); 
 
-    // Will add to this Amalecs code for adding movies
-  //console.log($(".movie-tittle").text()); 
-//   console.log($(this).attr("value")) 
-//   $("#watchList").append(`${$(this).attr("value")}`)
-// }) 
+//// function execute when document is fully loaded
+$(document).ready(function(){
+  popularMovies();
+
+})

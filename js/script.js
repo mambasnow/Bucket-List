@@ -173,7 +173,9 @@ $("body").on("click", ".addMovie", function(){
 }) 
 
 //Critics Review pull and links 
-fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")
+
+function articleApipull (){
+  fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -213,18 +215,18 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
           </div>`) 
         console.log('data.results[i].multimedia.src',data.results[i].multimedia.src)
         if ($("data.results[i].multimedia.src")){ 
-
         }
-       
-        
       }
-    
     })
     .catch((error) => console.error("FETCH ERROR:", error)); 
+};
+
+
 
 
 //// function execute when document is fully loaded
     $(document).ready(function(){
+      articleApipull ();
       popularMovies();
 
     })

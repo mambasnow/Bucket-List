@@ -101,7 +101,7 @@ function getRandomInt(max) {
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button addMovie" value="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>
   </div>`
@@ -122,8 +122,11 @@ $('.genreButton').click(genreButtonEvent);
 
 // this will be a function to add the movies to the list
 $("body").on("click", ".addMovie", function(){
-  console.log($(".movie-tittle").text());
-})
+  //console.log($(".movie-tittle").text()); 
+  console.log($(this).attr("value")) 
+  $("#watchList").append(`${$(this).attr("value")}`)
+}) 
+
 //Critics Review pull and links 
 fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")
     .then((response) => {

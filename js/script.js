@@ -252,6 +252,42 @@ function articleApipull (){
     .catch((error) => console.error("FETCH ERROR:", error)); 
 };
 
+function popularMovies(){
+  let popularMovieLink =  `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`;
+  fetch(popularMovieLink)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data){
+    console.log(data);
+    // need to grab 10 random movies from random pages
+    $('#results').empty();
+    for(i=0; i<10; i++){ $("#results").append(`    
+    <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+        </div>
+        <div class="media-content">
+          <p class="title is-4">${data.results[i].title}</p>
+        </div>
+      </div>
+      <div class="content">
+      <p>${data.results[i].overview}</p>
+        </div>
+        <button  class="button addMovie" value="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+      </div>
+    </div>
+  </div>`  
+    );
+    }
+  });
+ }
 
 
 //// function execute when document is fully loaded

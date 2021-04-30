@@ -49,7 +49,10 @@ display: inline;
 
 .card{ 
   margin:2px;
+  transition: all .2s ease-in-out;
 }
+
+.card:hover { transform: scale(1.1)
 
 .search-section{
   margin-bottom:2%;

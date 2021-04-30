@@ -40,7 +40,7 @@ fetch(movieSearchUrl)
       <div class="card-content">
         <div class="media">
           <div class="media-content">
-            <p class="title is-4 movie-tittle">${data.results[i].title}</p>
+            <p class="title is-4 movie-tittle" >${data.results[i].title}</p>
           </div>
         </div>
 
@@ -49,7 +49,7 @@ fetch(movieSearchUrl)
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button addMovie" data-title="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>`);
     }
@@ -101,7 +101,7 @@ function getRandomInt(max) {
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button addMovie" data-title="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>
   </div>`
@@ -120,10 +120,29 @@ function getRandomInt(max) {
 /// populates movies accordingly to selected genre
 $('.genreButton').click(genreButtonEvent);
 
+//this array will store the saved movies list
+var myMovieList = [];
+
+
 // this will be a function to add the movies to the list
 $("body").on("click", ".addMovie", function(){
-  console.log($(".movie-tittle").text());
+  // console.log($(this).data("title"));//This is the title that will be added to the list buttons
+  var movieItem = $(this).data("title");
+  var itemAdded = $(`${movieItem}`);
+  $("#watchList").append(`
+  <div class="buttons has-addons">
+  <button class="button" id="${movieItem}">${movieItem}</button>
+  <button class="button remove-movie"><i class="fas fa-minus"></i></button>
+</div>
+  `)
+  localStorage.setItem("movie", movieItem);
+  itemAdded.textContent = movieItem;
+ 
 })
+
+
+
+
 //Critics Review pull and links 
 fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")
     .then((response) => {
@@ -141,8 +160,8 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
         
       var titles =''  
       for (let i=0; i<10; i++){ 
-        console.log(i, data.results[i])
-        console.log(i, data.results[i].display_title)
+        // console.log(i, data.results[i])
+        // console.log(i, data.results[i].display_title)
         // titles = titles + data.results[i].display_title  
 
         // $("#findPicks").("reviews");

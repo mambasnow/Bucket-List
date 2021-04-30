@@ -1,5 +1,4 @@
 const movieApiKey = "f59588f382c7895cd8d35268297e4979";
-let resultsText = $("#resultsText");
 
 //for search function - amalec 
 //this is for the card with the movie information
@@ -9,7 +8,7 @@ var resultArea = document.querySelector("#results");
 
 
 $("#searchBtn").click(function(){ 
-  resultsText.text("Search Results:");
+ 
   var movieSearchUrl=`https://api.themoviedb.org/3/search/movie?api_key=${movieApiKey}&query=${$("#movieSearch").val() }`;
   
  
@@ -41,7 +40,7 @@ fetch(movieSearchUrl)
       <div class="card-content">
         <div class="media">
           <div class="media-content">
-            <p class="title is-4 movie-tittle">${data.results[i].title}</p>
+            <p class="title is-4 movie-tittle" >${data.results[i].title}</p>
           </div>
         </div>
 
@@ -50,61 +49,13 @@ fetch(movieSearchUrl)
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>`);
     }
   });
 });
 
-
-
-
-function popularMovies(){
-
- let popularMovieLink =  `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`;
-
- fetch(popularMovieLink)
- .then(function (response) {
-   return response.json();
- })
- .then(function (data){
-   console.log(data);
-
-   // need to grab 10 random movies from random pages
-   $('#results').empty();
-
-   for(i=0; i<10; i++){ $("#results").append(`    
-   <div class="card">
-   <div class="card-image">
-     <figure class="image is-4by3">
-       <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
-     </figure>
-   </div>
-   <div class="card-content">
-     <div class="media">
-       <div class="media-left">
-       </div>
-       <div class="media-content">
-         <p class="title is-4">${data.results[i].title}</p>
-       </div>
-     </div>
- 
-     <div class="content">
-     <p>${data.results[i].overview}</p>
-      
-       </div>
-       <button  class="button addMovie" value="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
-     </div>
-   </div>
- </div>`  
-   );
-   }
- });
-
-
-
-}
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -114,7 +65,7 @@ function getRandomInt(max) {
 
 // function that will run inside click for genres   
  function genreButtonEvent(event){
-  resultsText.text("Random " +$(this).text() + " " + "Results");  
+
   let randomPage = getRandomInt(500);
   let selectedMovieId = $(this).attr("id");
   let genreSearchURL = `https://api.themoviedb.org/3/genre/${selectedMovieId}/movies?api_key=${movieApiKey}&language=en-US&page=${randomPage}`;
@@ -131,10 +82,10 @@ function getRandomInt(max) {
     $('#results').empty();
 
     for(i=0; i<10; i++){ $("#results").append(`    
-    <div class=" card">
+    <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
+        <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}" data-image="${data.results[i].poster_path}">
       </figure>
     </div>
     <div class="card-content">
@@ -150,11 +101,10 @@ function getRandomInt(max) {
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie" value="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>
   </div>`
-    
     );
     }
   });
@@ -165,12 +115,93 @@ function getRandomInt(max) {
 /// populates movies accordingly to selected genre
 $('.genreButton').click(genreButtonEvent);
 
+//this array will store the saved movies list
+var myMovieList = [];
+
+
 // this will be a function to add the movies to the list
+function addingMoviesToList(){
 $("body").on("click", ".addMovie", function(){
-  //console.log($(".movie-tittle").text()); 
-  console.log($(this).attr("value")) 
-  $("#watchList").append(`${$(this).attr("value")}`)
-}) 
+  // console.log($(this).data("title"));//This is the title that will be added to the list buttons
+  var movieTitleItem = $(this).data("title");
+  var movieImageItem = $(this).data("image");
+  var movieOverviewItem = $(this).data("overview");
+  // console.log(movieImageItem);
+  $("#generatedList").append(`
+  <div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img src="http://image.tmdb.org/t/p/w500/${movieImageItem}" alt="${movieTitleItem}"">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+      </div>
+      <div class="media-content">
+        <p class="title is-4">${movieTitleItem}</p>
+      </div>
+    </div>
+
+    <div class="content">
+    <p>${movieOverviewItem}</p>
+
+  </div>
+</div>
+
+  `);
+
+  myMovieList.push({"title":movieTitleItem, "image": movieImageItem, "overview": movieOverviewItem});
+  
+
+  localStorage.setItem("movie", JSON.stringify(myMovieList));
+})
+}
+addingMoviesToList();
+
+// this function displays the saved movies from local storage
+
+function displaySavedMovies(){
+  var storedMovies= JSON.parse(localStorage.getItem("movie"));
+  console.log(storedMovies);
+  if (storedMovies !== null){
+    myMovieList =storedMovies;
+    for (var i = 0; i < storedMovies.length; i++) {
+      var movieTittles = storedMovies[i].title;
+      var movieOverviews = storedMovies[i].overview;
+      var movieImages = storedMovies[i].image;
+
+
+      $('#generatedList').append(`
+      <div class="card">
+      <div class="card-image">
+        <figure class="image is-4by3">
+          <img src="http://image.tmdb.org/t/p/w500/${movieImages}" alt="${movieTittles}"">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+          </div>
+          <div class="media-content">
+            <p class="title is-4">${movieTittles}</p>
+          </div>
+        </div>
+    
+        <div class="content">
+        <p>${movieOverviews}</p>
+    
+      </div>
+    </div>
+      `);
+    }
+
+}
+}
+displaySavedMovies();
+
+
+
 
 //Critics Review pull and links 
 fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")
@@ -182,7 +213,7 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
       }
     })
     .then(data => {
-      console.log(data);
+      // console.log(data);
       const reviewElement = $("#reviews")
       reviewElement.innerText = data.results[0].display_title
        
@@ -190,41 +221,17 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
       var titles =''  
       for (let i=0; i<5; i++){ 
         console.log(i, data.results[i])
-        console.log(i, data.results[i].display_title)
-        // titles = titles + data.results[i].display_title  
+        console.log(i, data.results[i].display_title);  
 
-        // $("#findPicks").("reviews");${da
-        //reviewElement.append(`<a href="${data.results[i].link.url}" target="_blank"><img src="${data.results[i].multimedia.src}><button class="button  is-normal genreButton">${data.results[i].display_title }</button></a>`)
-        //reviewElement.append(`<a href="${data.results[i].link.url}" ${data.results[i].display_title }target="_blank"><img src="${data.results[i].multimedia.src}"></a>`)
-        reviewElement.append(`<div class="card column articleCards">
-        <div class="card-image">
-          <figure class="image is-4by3">
-          <a href="${data.results[i].link.url}" target="_blank" ><img src="${data.results[i].multimedia.src}"></a>
-          </figure>
-        </div>
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left"> 
-            </div>
-            <div class="media-content ">
-            <p style="text-align:center">${data.results[i].display_title}</p>
-            <p style="font-weight: bold; text-align:center">Author: ${data.results[i].byline}</p>
-            </div>
-          </div>`) 
-        console.log('data.results[i].multimedia.src',data.results[i].multimedia.src)
-        if ($("data.results[i].multimedia.src")){ 
-
-        }
-       
-        
+        // $("#findPicks").("reviews");
+        reviewElement.append(`<a href="${data.results[i].link.url}" target="_blank"><button class="button is-info">${data.results[i].display_title }</button></a>`)
       }
     
     })
     .catch((error) => console.error("FETCH ERROR:", error)); 
 
-
 //// function execute when document is fully loaded
-    $(document).ready(function(){
-      popularMovies();
+$(document).ready(function(){
+  popularMovies();
 
-    })
+})

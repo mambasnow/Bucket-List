@@ -141,7 +141,11 @@ $("body").on("click", ".addMovie", function(){
 })
 
 
-
+// will add to this Amalecs code for adding movies
+  //console.log($(".movie-tittle").text()); 
+//   console.log($(this).attr("value")) 
+//   $("#watchList").append(`${$(this).attr("value")}`)
+// }) 
 
 //Critics Review pull and links 
 fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")

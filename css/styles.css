@@ -74,11 +74,13 @@ display: inline;
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(0,212,255,1) 38%, rgba(14,214,255,1) 46%, rgba(247,254,255,1) 93%);
   -webkit-box-shadow: 5px 5px 19px -9px #000000; 
   box-shadow: 5px 5px 19px -9px #000000;
+  overflow-x:auto;
 }
 
 #watchList h1{
   font-size: 150%;
   font-weight: bold;
+  margin-bottom: 5px;
 
 }
 

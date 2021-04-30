@@ -49,7 +49,7 @@ fetch(movieSearchUrl)
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie" data-title="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>`);
     }
@@ -85,7 +85,7 @@ function getRandomInt(max) {
     <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
+        <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}" data-image="${data.results[i].poster_path}">
       </figure>
     </div>
     <div class="card-content">
@@ -101,15 +101,13 @@ function getRandomInt(max) {
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie" data-title="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>
   </div>`
     
     //// new card
-   
-    
-    
+
     );
     }
   });
@@ -125,27 +123,88 @@ var myMovieList = [];
 
 
 // this will be a function to add the movies to the list
+function addingMoviesToList(){
 $("body").on("click", ".addMovie", function(){
   // console.log($(this).data("title"));//This is the title that will be added to the list buttons
-  var movieItem = $(this).data("title");
-  var itemAdded = $(`${movieItem}`);
-  $("#watchList").append(`
-  <div class="buttons has-addons">
-  <button class="button" id="${movieItem}">${movieItem}</button>
-  <button class="button remove-movie"><i class="fas fa-minus"></i></button>
+  var movieTitleItem = $(this).data("title");
+  var movieImageItem = $(this).data("image");
+  var movieOverviewItem = $(this).data("overview");
+  // console.log(movieImageItem);
+  $("#generatedList").append(`
+  <div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img src="http://image.tmdb.org/t/p/w500/${movieImageItem}" alt="${movieTitleItem}"">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+      </div>
+      <div class="media-content">
+        <p class="title is-4">${movieTitleItem}</p>
+      </div>
+    </div>
+
+    <div class="content">
+    <p>${movieOverviewItem}</p>
+
+  </div>
 </div>
-  `)
-  localStorage.setItem("movie", movieItem);
-  itemAdded.textContent = movieItem;
- 
+
+  `);
+
+  myMovieList.push({"title":movieTitleItem, "image": movieImageItem, "overview": movieOverviewItem});
+  
+
+  localStorage.setItem("movie", JSON.stringify(myMovieList));
 })
+}
+addingMoviesToList();
+
+// this function displays the saved movies from local storage
+
+function displaySavedMovies(){
+  var storedMovies= JSON.parse(localStorage.getItem("movie"));
+  console.log(storedMovies);
+  if (storedMovies !== null){
+    myMovieList =storedMovies;
+    for (var i = 0; i < storedMovies.length; i++) {
+      var movieTittles = storedMovies[i].title;
+      var movieOverviews = storedMovies[i].overview;
+      var movieImages = storedMovies[i].image;
 
 
-// will add to this Amalecs code for adding movies
-  //console.log($(".movie-tittle").text()); 
-//   console.log($(this).attr("value")) 
-//   $("#watchList").append(`${$(this).attr("value")}`)
-// }) 
+      $('#generatedList').append(`
+      <div class="card">
+      <div class="card-image">
+        <figure class="image is-4by3">
+          <img src="http://image.tmdb.org/t/p/w500/${movieImages}" alt="${movieTittles}"">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+          </div>
+          <div class="media-content">
+            <p class="title is-4">${movieTittles}</p>
+          </div>
+        </div>
+    
+        <div class="content">
+        <p>${movieOverviews}</p>
+    
+      </div>
+    </div>
+      `);
+    }
+
+}
+}
+displaySavedMovies();
+
+
+
 
 //Critics Review pull and links 
 fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publication-date&api-key=52r5MjsfbPQO7USvr34rtacLDbMv8AMP")
@@ -157,7 +216,7 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
       }
     })
     .then(data => {
-      console.log(data);
+      // console.log(data);
       const reviewElement = $("#reviews")
       reviewElement.innerText = data.results[0].display_title
        
@@ -174,3 +233,9 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
     
     })
     .catch((error) => console.error("FETCH ERROR:", error)); 
+
+    // Will add to this Amalecs code for adding movies
+  //console.log($(".movie-tittle").text()); 
+//   console.log($(this).attr("value")) 
+//   $("#watchList").append(`${$(this).attr("value")}`)
+// }) 

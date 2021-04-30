@@ -188,7 +188,7 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
        
         
       var titles =''  
-      for (let i=0; i<10; i++){ 
+      for (let i=0; i<5; i++){ 
         console.log(i, data.results[i])
         console.log(i, data.results[i].display_title)
         // titles = titles + data.results[i].display_title  
@@ -196,19 +196,19 @@ fetch("https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-publica
         // $("#findPicks").("reviews");${da
         //reviewElement.append(`<a href="${data.results[i].link.url}" target="_blank"><img src="${data.results[i].multimedia.src}><button class="button  is-normal genreButton">${data.results[i].display_title }</button></a>`)
         //reviewElement.append(`<a href="${data.results[i].link.url}" ${data.results[i].display_title }target="_blank"><img src="${data.results[i].multimedia.src}"></a>`)
-        reviewElement.append(` <div class="card">
+        reviewElement.append(`<div class="card column articleCards">
         <div class="card-image">
           <figure class="image is-4by3">
-           <img src="${data.results[i].multimedia.src}">
+          <a href="${data.results[i].link.url}" target="_blank" ><img src="${data.results[i].multimedia.src}"></a>
           </figure>
         </div>
         <div class="card-content">
           <div class="media">
             <div class="media-left"> 
-            
             </div>
             <div class="media-content ">
-            <a href="${data.results[i].link.url}" target="_blank" ><p class="title is-4">${data.results[i].display_title}</p></a>
+            <p style="text-align:center">${data.results[i].display_title}</p>
+            <p style="font-weight: bold; text-align:center">Author: ${data.results[i].byline}</p>
             </div>
           </div>`) 
         console.log('data.results[i].multimedia.src',data.results[i].multimedia.src)

@@ -143,7 +143,8 @@ function addingMoviesToList() {
 		var movieOverviewItem = $(this).data("overview");
 		// console.log(movieImageItem);
 		$("#generatedList").append(`
-  <div class="card">
+  <div class="card remove-here">
+  <button class="button is-fullwidth is-danger is-light remove" >Remove</button>
   <div class="card-image">
     <figure class="image is-4by3">
       <img src="http://image.tmdb.org/t/p/w500/${movieImageItem}" alt="${movieTitleItem}"">
@@ -162,7 +163,6 @@ function addingMoviesToList() {
     <p>${movieOverviewItem}</p>
 
   </div>
-  <button class="button is-fullwidth is-danger is-light remove" >Remove</button>
 </div>
 
   `);

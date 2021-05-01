@@ -52,8 +52,8 @@ $("#searchBtn").click(function() {
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
-        <button id="trailerModal">Watch Trailer</button>
+        <button  class="button is-primary is-light addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button class="button is-link is-light" id="trailerModal">Watch Trailer</button>
         </div>
     </div>`);
 			}
@@ -110,8 +110,8 @@ function genreButtonEvent(event) {
       <p>${data.results[i].overview}</p>
        
         </div>
-        <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
-        <button id="trailerModal">Watch Trailer</button>
+        <button  class="button is-primary is-light addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button is-link is-light" id="trailerModal">Watch Trailer</button>
         </div>
     </div>
   </div>`);
@@ -251,11 +251,13 @@ function removeMovie(){
     // localStorage.removeItem("movieTittles");
     console.log($(this).parent());
     $(this).parent().remove();
- 
+    storedMovies = JSON.parse(localStorage.getItem("movie"));
+    myMovieList.splice(0,1);
+    localStorage.setItem("movie", JSON.stringify(myMovieList));
   })
   
 }
-removeMovie();
+
 
 
 
@@ -339,8 +341,8 @@ function popularMovies() {
       <div class="content">
       <p>${data.results[i].overview}</p>
         </div>
-        <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
-        <button class="button" id="trailerModal">Watch Trailer</button>
+        <button  class="button is-primary is-light addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button class="button is-link is-light" id="trailerModal">Watch Trailer</button>
       </div>
     </div>
   </div>`);
@@ -361,6 +363,7 @@ $(document).ready(function() {
 	popularMovies();
 	addingMoviesToList();
 	displaySavedMovies();
+  removeMovie();
 
 
 	$(".modal-background").click(function() {

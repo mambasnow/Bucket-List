@@ -81,7 +81,7 @@ display: inline;
 }
 
 #watchList{
-  height: 400px;
+  height: 600px;
   background-color: grey;
   margin-top: 15px;
   text-align: center;
@@ -104,4 +104,9 @@ footer{
   height: 50px;
   display: flex;
   justify-content: center;
+}
+
+
+.modal-content{
+  width: 60%;
 }

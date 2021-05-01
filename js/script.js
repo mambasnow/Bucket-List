@@ -152,8 +152,6 @@ $("body").on("click", ".addMovie", function(){
   `);
 
   myMovieList.push({"title":movieTitleItem, "image": movieImageItem, "overview": movieOverviewItem});
-  
-
   localStorage.setItem("movie", JSON.stringify(myMovieList));
 })
 }
@@ -222,8 +220,8 @@ function articleApipull (){
         
       var titles =''  
       for (let i=0; i<5; i++){ 
-        console.log(i, data.results[i])
-        console.log(i, data.results[i].display_title)
+        // console.log(i, data.results[i])
+        // console.log(i, data.results[i].display_title)
         // titles = titles + data.results[i].display_title  
 
         // $("#findPicks").("reviews");${da
@@ -244,7 +242,7 @@ function articleApipull (){
             <p style="font-weight: bold; text-align:center">Author: ${data.results[i].byline}</p>
             </div>
           </div>`) 
-        console.log('data.results[i].multimedia.src',data.results[i].multimedia.src)
+        // console.log('data.results[i].multimedia.src',data.results[i].multimedia.src)
         if ($("data.results[i].multimedia.src")){ 
         }
       }
@@ -280,11 +278,12 @@ function popularMovies(){
       <div class="content">
       <p>${data.results[i].overview}</p>
         </div>
-        <button  class="button addMovie" value="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
       </div>
     </div>
   </div>`  
     );
+    
     }
   });
  }

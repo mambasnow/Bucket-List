@@ -3,6 +3,9 @@
   font-size: 250%;
   float: left;
 }
+::-webkit-scrollbar{
+  display: none;
+}
 
 
 

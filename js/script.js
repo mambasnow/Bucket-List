@@ -247,7 +247,7 @@ function displaySavedMovies() {
 
 function removeMovie(){
   $("body").on("click", ".remove", function() {
-    console.log("click")
+    // console.log("click")
     // localStorage.removeItem("movieTittles");
     console.log($(this).parent());
     $(this).parent().remove();
@@ -257,7 +257,13 @@ function removeMovie(){
   })
   
 }
-
+function clearMovieLIst(){
+  $("#clear-list").click(function(){
+   localStorage.removeItem("movie");
+   $("div").remove("#generatedList");
+  })
+}
+clearMovieLIst();
 
 
 

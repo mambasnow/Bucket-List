@@ -7,6 +7,7 @@ var resultArea = document.querySelector("#results");
 
 
 
+
 $("#searchBtn").click(function(){ 
  
   var movieSearchUrl=`https://api.themoviedb.org/3/search/movie?api_key=${movieApiKey}&query=${$("#movieSearch").val() }`;
@@ -37,7 +38,7 @@ fetch(movieSearchUrl)
           <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
         </figure>
       </div>
-      <div class="card-content">
+      <div class="card-content" id="${data.results[i].id}">
         <div class="media">
           <div class="media-content">
             <p class="title is-4 movie-tittle" >${data.results[i].title}</p>
@@ -50,9 +51,11 @@ fetch(movieSearchUrl)
        
         </div>
         <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
-      </div>
+        <button id="trailerModal">Watch Trailer</button>
+        </div>
     </div>`);
     }
+    modalFeature();
   });
 });
 
@@ -60,6 +63,7 @@ fetch(movieSearchUrl)
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
+
 
 
 
@@ -88,7 +92,7 @@ function getRandomInt(max) {
         <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}" data-image="${data.results[i].poster_path}">
       </figure>
     </div>
-    <div class="card-content">
+    <div class="card-content" id="${data.results[i].id}">
       <div class="media">
         <div class="media-left">
         </div>
@@ -102,11 +106,13 @@ function getRandomInt(max) {
        
         </div>
         <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
-      </div>
+        <button id="trailerModal">Watch Trailer</button>
+        </div>
     </div>
   </div>`
     );
     }
+    modalFeature();
   });
 
 
@@ -114,6 +120,11 @@ function getRandomInt(max) {
   
 /// populates movies accordingly to selected genre
 $('.genreButton').click(genreButtonEvent);
+
+
+
+
+
 
 //this array will store the saved movies list
 var myMovieList = [];
@@ -157,7 +168,32 @@ $("body").on("click", ".addMovie", function(){
   localStorage.setItem("movie", JSON.stringify(myMovieList));
 })
 }
-addingMoviesToList();
+
+
+function modalFeature(){
+  $("body").on("click", "#trailerModal", function(){
+    // console.log($(this).data("title"));//This is the title that will be added to the list buttons
+    $('.modal').addClass('is-active');
+    let trailerURL = `https://api.themoviedb.org/3/movie/${$(this).parent().attr("id")}?api_key=${movieApiKey}&append_to_response=videos`;
+    let youtubeLink = `https://www.youtube.com/embed/`;
+    console.log(trailerURL);
+
+    fetch(trailerURL)
+      .then(response => response.json())
+      .then(data =>{
+        console.log(data);
+        $(`.modal-content`).append(`
+        <iframe class="videoPlayer" width="853" height="505"
+        src="${youtubeLink + data.videos.results[0].key}">
+        </iframe>
+        `)
+
+       
+  });
+  })
+  }
+
+
 
 // this function displays the saved movies from local storage
 
@@ -198,7 +234,7 @@ function displaySavedMovies(){
 
 }
 }
-displaySavedMovies();
+
 
 
 
@@ -263,13 +299,13 @@ function popularMovies(){
     // need to grab 10 random movies from random pages
     $('#results').empty();
     for(i=0; i<10; i++){ $("#results").append(`    
-    <div class="card">
+    <div class="card" >
     <div class="card-image">
       <figure class="image is-4by3">
         <img src="http://image.tmdb.org/t/p/w500/${data.results[i].poster_path}" alt="${data.results[i].original_title}">
       </figure>
     </div>
-    <div class="card-content">
+    <div class="card-content" id="${data.results[i].id}">
       <div class="media">
         <div class="media-left">
         </div>
@@ -281,18 +317,31 @@ function popularMovies(){
       <p>${data.results[i].overview}</p>
         </div>
         <button  class="button addMovie" value="${data.results[i].title}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
+        <button id="trailerModal">Watch Trailer</button>
       </div>
     </div>
   </div>`  
     );
     }
+    modalFeature();
   });
  }
+
+ 
+
+
 
 
 //// function execute when document is fully loaded
     $(document).ready(function(){
       articleApipull ();
       popularMovies();
+      addingMoviesToList();
+      displaySavedMovies();
+      
 
+      $(".modal-background").click(function(){
+        $(".modal").removeClass("is-active");
+        $(".modal-content").empty();
+      })
 })

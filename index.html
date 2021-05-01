@@ -6,18 +6,20 @@
   <title>The Bucket List</title>
 
   <!-- Bulma Version 0.9.0-->
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
   <link rel='stylesheet' href='css/reset.css'>
   <link rel='stylesheet' href='https://unpkg.com/bulma@0.9.0/css/bulma.min.css'>
   <link rel="stylesheet" href="../Bucket-List/css/styles.css">
   <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
   <!-- this is the tittle with the hamburger menu-->
   <nav class="navbar has-shadow">
     <div class="container is-fullhd">
-      <h1 class="is-title is-left" id="headerName">The Bucket List</h1>
+      <h1 class="is-title is-left" id="headerName">The Bucket List <span class="iconify" data-icon="mdi-bucket" data-inline="false" style="color: rgb(101, 101, 226);"></span></h1>
     </div>
   </nav>
 
@@ -87,7 +89,7 @@
 </section>
 <div id="watchList" class="myList">
   <!--this is where the saved movies will go-->
-    <h1>Watch List</h1>
+    <h1 id="watchTitle">Watch List</h1>
     <div style="background-color: none;" id="generatedList" class="columns">
     
     </div>

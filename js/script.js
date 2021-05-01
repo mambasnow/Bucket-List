@@ -11,6 +11,7 @@ var resultArea = document.querySelector("#results");
 $("#searchBtn").click(function() {
 
 	var movieSearchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${movieApiKey}&query=${$("#movieSearch").val() }`;
+  $("#resultsText").text("Search Results:");
 
 
 	fetch(movieSearchUrl)
@@ -71,9 +72,11 @@ function getRandomInt(max) {
 // function that will run inside click for genres   
 function genreButtonEvent(event) {
 
-	let randomPage = getRandomInt(500);
-	let selectedMovieId = $(this).attr("id");
-	let genreSearchURL = `https://api.themoviedb.org/3/genre/${selectedMovieId}/movies?api_key=${movieApiKey}&language=en-US&page=${randomPage}`;
+  let randomPage = getRandomInt(500);
+  let selectedMovieId = $(this).attr("id");
+  let genreSearchURL = `https://api.themoviedb.org/3/genre/${selectedMovieId}/movies?api_key=${movieApiKey}&language=en-US&page=${randomPage}`;
+  
+  $("#resultsText").text(`Random movies for ${$(this).text()}:`);
 
 
 	fetch(genreSearchURL)
@@ -337,7 +340,7 @@ function popularMovies() {
       <p>${data.results[i].overview}</p>
         </div>
         <button  class="button addMovie" data-title="${data.results[i].title}" data-image="${data.results[i].poster_path}" data-overview="${data.results[i].overview}"><i class="fas fa-ticket-alt"> Add to my list</i></button>
-        <button id="trailerModal">Watch Trailer</button>
+        <button class="button" id="trailerModal">Watch Trailer</button>
       </div>
     </div>
   </div>`);
